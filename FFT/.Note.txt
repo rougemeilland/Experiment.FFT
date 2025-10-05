@@ -1,0 +1,13 @@
+﻿- Complex 型の Negative 演算子の最適化が甘いことに注意。
+  例:
+    int x;
+    int y;
+    int z = - x + y ; // JIT により "y - x" に最適化される
+
+    double x;
+    double y;
+    double z = - x + y ; // JIT により "y - x" に最適化される
+
+    Complex x;
+    Complex y;
+    Complex z = - x + y ; // JIT によるコード生成結果は "new Complex(-x.Real + y.Real, -x.Imaginary + y.Imaginary)" と同等 (最適化されていない!!)
